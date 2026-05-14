@@ -20,8 +20,6 @@ O fluxo esperado da aplicacao e:
 - Spring Boot
 - Spring AI
 - Gradle
-- Docker
-- Docker Compose
 - Clean Architecture
 
 ## Arquitetura
@@ -78,55 +76,6 @@ audio/mpeg
 
 ## Como Executar
 
-### Com Docker Compose
-
-Defina a chave da OpenAI no ambiente:
-
-```bash
-export OPENAI_API_KEY=sua-chave-aqui
-```
-
-Ou crie um arquivo `.env` a partir do exemplo:
-
-```bash
-cp .env.example .env
-```
-
-Depois edite o `.env` e informe sua chave:
-
-```text
-OPENAI_API_KEY=sua-chave-aqui
-```
-
-Suba a aplicacao:
-
-```bash
-docker compose up --build
-```
-
-A aplicacao ficara disponivel em:
-
-```text
-http://localhost:8080
-```
-
-Exemplo de chamada:
-
-```bash
-curl -X POST http://localhost:8080/voice-commands \
-  -H "Content-Type: application/json" \
-  -o assistant-response.mp3 \
-  -d '{"answer":"Explique em poucas palavras o que e Spring AI."}'
-```
-
-Para parar os containers:
-
-```bash
-docker compose down
-```
-
-### Localmente
-
 Execute a aplicacao com:
 
 ```bash
@@ -149,10 +98,6 @@ src/main/resources/application-dev.yaml
 ```
 
 Caso o projeto utilize um provedor externo de IA, configure as credenciais por variaveis de ambiente ou por profile local, evitando versionar chaves sensiveis.
-
-Ao executar com Docker Compose, o profile `dev` e ativado automaticamente por `SPRING_PROFILES_ACTIVE=dev`, e a aplicacao espera receber `OPENAI_API_KEY` pelo ambiente.
-
-Se `OPENAI_API_KEY` nao estiver definida, o Docker Compose interrompe a execucao antes de iniciar o container. Isso evita o erro de inicializacao do Spring AI informando que a chave da OpenAI nao foi configurada.
 
 ## Status
 
